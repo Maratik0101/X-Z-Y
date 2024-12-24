@@ -1,0 +1,38 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        string filePath = "C:\\Users\\Марат\\Downloads\\24_demo.txt"; // Укажите путь к вашему файлу
+        int maxLength = FindLongestXSequence(filePath);
+        Console.WriteLine($"Максимальная длина последовательности X: {maxLength}");
+    }
+
+    static int FindLongestXSequence(string filePath)
+    {
+        string data = File.ReadAllText(filePath); // Читаем содержимое файла
+
+        int maxLength = 0;
+        int currentLength = 0;
+
+        foreach (char c in data)
+        {
+            if (c == 'X')
+            {
+                currentLength++;
+                if (currentLength > maxLength)
+                {
+                    maxLength = currentLength;
+                }
+            }
+            else
+            {
+                currentLength = 0; // Сбрасываем текущую длину, если встречаем не 'X'
+            }
+        }
+
+        return maxLength;
+    }
+}
